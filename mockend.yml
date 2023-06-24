@@ -1,7 +1,0 @@
-key: 'Gn5476Bxyy'
-
-todos:
-  - id: integer
-    userId: integer
-    title: string
-    completed: boolean

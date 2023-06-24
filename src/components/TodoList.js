@@ -11,7 +11,7 @@ const TodoList = () => {
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const response = await axios.get('/api/todos');
+        const response = await axios.get('http://localhost:3004/todos');
         setTodos(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -30,7 +30,7 @@ const TodoList = () => {
     if (todo) {
       try {
         const updatedTodo = { ...todo, completed: !todo.completed };
-        await axios.put(`api/todos/${id}`, updatedTodo);
+        await axios.put(`http://localhost:3004/todos/${id}`, updatedTodo);
         setTodos(todos.map(todo => todo.id === id ? updatedTodo : todo));
       } catch (error) {
         console.error('Error updating todo:', error);
@@ -40,7 +40,7 @@ const TodoList = () => {
 
   const handleDeleteTodo = async (id) => {
     try {
-      await axios.delete(`api/todos/${id}`);
+      await axios.delete(`http://localhost:3004/todos/${id}`);
       setTodos(todos.filter(todo => todo.id !== id));
     } catch (error) {
       console.error('Error deleting todo:', error);
