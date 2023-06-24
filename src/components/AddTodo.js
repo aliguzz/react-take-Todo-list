@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
+
 const AddTodo = ({ onAddTodo }) => {
   const [title, setTitle] = useState('');
 
@@ -17,7 +19,7 @@ const AddTodo = ({ onAddTodo }) => {
     };
 
     try {
-      const response = await axios.post('https://mockend.com/aliguzz/react-take-Todo-list/todos', newTodo);
+      const response = await axios.post('/api/todos', newTodo);
       onAddTodo(response.data);
       setTitle('');
     } catch (error) {

@@ -1,0 +1,5 @@
+todos:
+  - id: integer
+    userId: integer
+    title: string
+    completed: boolean

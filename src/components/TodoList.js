@@ -3,13 +3,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AddTodo from './AddTodo';
 
+
+
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const response = await axios.get('https://mockend.com/aliguzz/react-take-Todo-list/todos');
+        const response = await axios.get('/api/todos');
         setTodos(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -28,7 +30,7 @@ const TodoList = () => {
     if (todo) {
       try {
         const updatedTodo = { ...todo, completed: !todo.completed };
-        await axios.put(`https://mockend.com/aliguzz/react-take-Todo-list/todos/${id}`, updatedTodo);
+        await axios.put(`api/todos/${id}`, updatedTodo);
         setTodos(todos.map(todo => todo.id === id ? updatedTodo : todo));
       } catch (error) {
         console.error('Error updating todo:', error);
@@ -38,7 +40,7 @@ const TodoList = () => {
 
   const handleDeleteTodo = async (id) => {
     try {
-      await axios.delete(`https://mockend.com/aliguzz/react-take-Todo-list/todos/${id}`);
+      await axios.delete(`api/todos/${id}`);
       setTodos(todos.filter(todo => todo.id !== id));
     } catch (error) {
       console.error('Error deleting todo:', error);
@@ -50,7 +52,8 @@ const TodoList = () => {
       <AddTodo onAddTodo={handleAddTodo} />
 
       <ul>
-        {todos.map(todo => (
+          
+        {Array.isArray(todos) && todos.map(todo => (
           <li key={todo.id}>
             <input
               type="checkbox"
