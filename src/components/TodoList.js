@@ -5,6 +5,7 @@ import AddTodo from './AddTodo';
 
 
 
+
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
 
@@ -51,17 +52,19 @@ const TodoList = () => {
     <div>
       <AddTodo onAddTodo={handleAddTodo} />
 
-      <ul>
+      <ul className="todo-list">
           
         {Array.isArray(todos) && todos.map(todo => (
-          <li key={todo.id}>
+          <li key={todo.id} className={todo.completed ? 'completed' : ''}>
             <input
               type="checkbox"
               checked={todo.completed}
               onChange={() => handleToggleCompleted(todo.id)}
             />
             {todo.title}
-            <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+            <button className="delete-button" onClick={() => handleDeleteTodo(todo.id)}>
+            <span className="material-icons">delete</span>
+            </button>
           </li>
         ))}
       </ul>

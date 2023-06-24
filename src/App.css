@@ -33,3 +33,48 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background: #bbb;
 }
+
+
+/* TodoList.css */
+
+ul.todo-list {
+  list-style-type: none;
+  padding-left: 0;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+ul.todo-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* this ensures that the content is spaced out */
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+ul.todo-list li:last-child {
+  border-bottom: none;
+}
+
+ul.todo-list li input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+ul.todo-list li.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #f44336; /* Red color */
+}
+
+.delete-button:focus {
+  outline: none;
+}
