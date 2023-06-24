@@ -1,44 +1,69 @@
+// TodoList.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Checkbox, ListItem, ListItemText, List } from '@mui/material';
+import AddTodo from './AddTodo';
 
 const TodoList = () => {
-    const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            // Replace the URL below with your mockend.com URL
-            const result = await axios('https://mockend.com/aliguzz/react-take-Todo-list/todos');
-            setTodos(result.data);
-        };
-        fetchData();
-    }, []);
-
-    const toggleTodo = id => {
-        setTodos(
-            todos.map(todo =>
-                todo.id === id ? { ...todo, completed: !todo.completed } : todo
-            )
-        );
+  useEffect(() => {
+    const fetchTodos = async () => {
+      try {
+        const response = await axios.get('https://mockend.com/aliguzz/react-take-Todo-list/todos');
+        setTodos(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
 
-    return (
-        <List>
-            {todos.map(todo => (
-                <ListItem key={todo.id} dense button onClick={() => toggleTodo(todo.id)}>
-                    <Checkbox
-                        checked={todo.completed}
-                        tabIndex={-1}
-                        disableRipple
-                    />
-                    <ListItemText
-                        primary={todo.title}
-                        style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
-                    />
-                </ListItem>
-            ))}
-        </List>
-    );
+    fetchTodos();
+  }, []);
+
+  const handleAddTodo = (newTodo) => {
+    setTodos([...todos, newTodo]);
+  };
+
+  const handleToggleCompleted = async (id) => {
+    const todo = todos.find(todo => todo.id === id);
+    if (todo) {
+      try {
+        const updatedTodo = { ...todo, completed: !todo.completed };
+        await axios.put(`https://mockend.com/aliguzz/react-take-Todo-list/todos/${id}`, updatedTodo);
+        setTodos(todos.map(todo => todo.id === id ? updatedTodo : todo));
+      } catch (error) {
+        console.error('Error updating todo:', error);
+      }
+    }
+  };
+
+  const handleDeleteTodo = async (id) => {
+    try {
+      await axios.delete(`https://mockend.com/aliguzz/react-take-Todo-list/todos/${id}`);
+      setTodos(todos.filter(todo => todo.id !== id));
+    } catch (error) {
+      console.error('Error deleting todo:', error);
+    }
+  };
+
+  return (
+    <div>
+      <AddTodo onAddTodo={handleAddTodo} />
+
+      <ul>
+        {todos.map(todo => (
+          <li key={todo.id}>
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() => handleToggleCompleted(todo.id)}
+            />
+            {todo.title}
+            <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default TodoList;
