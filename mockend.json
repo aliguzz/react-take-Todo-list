@@ -1,23 +1,19 @@
 {
   "todos": {
     "type": "array",
-    "max": 20,
     "items": {
       "type": "object",
       "properties": {
         "userId": {
           "type": "integer",
-          "minimum": 1,
-          "maximum": 10
+          "minimum": 1
         },
         "id": {
           "type": "integer",
-          "minimum": 1,
-          "maximum": 100
+          "minimum": 1
         },
         "title": {
-          "type": "string",
-          "faker": "lorem.sentence"
+          "type": "string"
         },
         "completed": {
           "type": "boolean"
