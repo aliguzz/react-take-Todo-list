@@ -19,7 +19,7 @@ const AddTodo = ({ onAddTodo }) => {
     };
 
     try {
-      const response = await axios.post('/api/todos', newTodo);
+      const response = await axios.post('https://mockend.com/api/aliguzz/react-take-Todo-list/todos', newTodo);
       onAddTodo(response.data);
       setTitle('');
     } catch (error) {

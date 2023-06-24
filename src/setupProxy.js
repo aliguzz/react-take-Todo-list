@@ -1,14 +1,15 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-module.exports = function (app) {
+module.exports = function(app) {
   app.use(
-    '/api',
+    '/api', // Proxy path
     createProxyMiddleware({
-      target: 'https://mockend.com/api',
-      changeOrigin: true,
-      pathRewrite: {
-        '^/api': '/aliguzz/react-take-Todo-list',
+      target: 'https://mockend.com/api', // The server to forward requests to
+      changeOrigin: true, // Required for virtual hosted sites
+      pathRewrite: { // Rewrite the URL path
+        '^/api': '/aliguzz/react-take-Todo-list/todos', // Replace '/api' with your Mockend path
       },
     })
   );
 };
+
