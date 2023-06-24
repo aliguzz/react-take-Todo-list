@@ -2,27 +2,15 @@
   "todos": [
     {
       "userId": 1,
-      "title": "good",
-      "completed": false,
-      "id": 15
-    },
-    {
-      "userId": 1,
-      "title": "again",
+      "title": "its our fist list to be added",
       "completed": true,
-      "id": 16
+      "id": 19
     },
     {
       "userId": 1,
-      "title": "last tree",
+      "title": "two ",
       "completed": false,
-      "id": 17
-    },
-    {
-      "userId": 1,
-      "title": "lsitjijslkfjadsklfj ldksjf sfljf dsfjf",
-      "completed": false,
-      "id": 18
+      "id": 20
     }
   ]
 }
