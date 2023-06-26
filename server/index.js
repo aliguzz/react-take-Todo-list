@@ -99,8 +99,17 @@ app.post('/api/login', (req, res) => {
 });
 
 // Add more endpoints for todos (GET, POST, DELETE, etc.)
-//let todos = require('../db.json');
-//let todos = [];
+
+app.get('/todos', (req, res) => {
+    let userId  = parseInt(req.query.userId);    
+    // Logic to retrieve todos based on userId
+    // For example:
+    const userTodos = db.todos.filter(todo => todo.userId === userId);
+    
+    res.json(userTodos);
+  });
+    
+
 // POST request to add a new todo
 app.post('/todos', (req, res) => {
     const { userId, title, completed } = req.body;
