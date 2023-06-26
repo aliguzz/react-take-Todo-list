@@ -1,5 +1,6 @@
 // AddTodo.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { List, ListItem, ListItemText, Checkbox, TextField, Button, ListItemSecondaryAction, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -7,7 +8,16 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 
 const AddTodo = ({ onAddTodo }) => {
+  const navigate = useNavigate();
+  const isLoggedIn = localStorage.getItem('isLoggedIn');
+  const user_id = localStorage.getItem('user_id');
   const [title, setTitle] = useState('');
+  if(isLoggedIn == false){
+    window.history.replaceState(null, null, '/');
+    setTimeout(() => {
+      navigate('/login');
+    }, 50); // Delay in milliseconds
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,13 +25,13 @@ const AddTodo = ({ onAddTodo }) => {
     if (title.trim() === '') return;
 
     const newTodo = {
-      userId: 1,
+      userId: user_id,
       title: title,
       completed: false,
     };
 
     try {
-      const response = await axios.post('http://localhost:3004/todos', newTodo);
+      const response = await axios.post('http://localhost:3001/todos', newTodo);
       onAddTodo(response.data);
       setTitle('');
     } catch (error) {
@@ -53,16 +63,7 @@ const AddTodo = ({ onAddTodo }) => {
                 Add Todo
             </Button>
   </div>
-  /*  <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="New todo"
-      />
-      <button type="submit">Add Todo</button>
-    </form>
-    */
+
   );
 };
 

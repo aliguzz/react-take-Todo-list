@@ -1,3 +1,4 @@
+
 body {
   font-family: Arial, sans-serif;
 }
@@ -12,6 +13,15 @@ form {
 }
 
 input[type="text"] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+input[type="password"] {
   padding: 10px;
   font-size: 17px;
   border: 1px solid grey;
@@ -77,4 +87,66 @@ ul.todo-list li.completed {
 
 .delete-button:focus {
   outline: none;
+}
+
+
+/*  login page css */
+
+.container {
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.container h2 {
+  text-align: center;
+  color: #333;
+}
+
+.container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.container input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.container button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.container button:hover {
+  background-color: #45a049;
+}
+
+.container.link-button {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.container.link-button a {
+  color: #333;
+  text-decoration: none;
+}
+
+.container>.link-button a:hover {
+  text-decoration: underline;
+}
+
+.custom-button {
+  background-color: #ff0000 !important; /* Set your desired background color */
+  color: #ffffff !important; /* Set your desired text color */
 }
